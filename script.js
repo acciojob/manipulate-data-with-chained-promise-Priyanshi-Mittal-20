@@ -6,7 +6,7 @@ function getArray() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(arr);
-    }, 3000);
+    },0);
   });
 }
 
