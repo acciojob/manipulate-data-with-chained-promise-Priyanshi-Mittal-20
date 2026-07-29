@@ -1,27 +1,32 @@
 //your JS code here. If required.
-let arr = [1, 2, 3, 4];
+const arr = [1, 2, 3, 4];
+const output = document.getElementById("output");
 
-let output = document.getElementById("output");
-
-new Promise((resolve, reject) => {
+function getArray() {
+  return new Promise((resolve) => {
     setTimeout(() => {
-        let odd = arr.filter(num => num % 2 !== 0);
-        output.innerText = odd;
-        resolve(arr);
-    }, 1000);
-})
-.then((data) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            let even = data
-                .filter(num => num % 2 === 0)
-                .map(num => num * 2);
+      resolve(arr);
+    }, 3000);
+  });
+}
 
-            output.innerText = even;
-            resolve();
-        }, 2000);
+getArray()
+  .then((data) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const evenNumbers = data.filter((num) => num % 2 === 0);
+        output.innerText = evenNumbers.join(",");
+        resolve(evenNumbers);
+      }, 1000);
     });
-})
-.catch((err) => {
-    console.log(err);
-});
+  })
+  .then((evenNumbers) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const doubled = evenNumbers.map((num) => num * 2);
+        output.innerText = doubled.join(",");
+        resolve(doubled);
+      }, 2000);
+    });
+  })
+  .catch((err) => console.log(err));
