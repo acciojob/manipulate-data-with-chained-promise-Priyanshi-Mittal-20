@@ -2,31 +2,26 @@
 const arr = [1, 2, 3, 4];
 const output = document.getElementById("output");
 
-function getArray() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(arr);
-    },3000);
-  });
-}
+function getArray(){
+	return new Promise((resolve)=>{
+	setTimeout(()=>{
+		let oddArr=arr.filter((elem)=>{
+			if(elem%2!=0)
+			{
+				return elem
+			}
+		})
+		output.innerText=oddArr
+	},1000)
 
-getArray()
-  .then((data) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const evenNumbers = data.filter((num) => num % 2 === 0);
-        output.innerText = evenNumbers.join(",");
-        resolve(evenNumbers);
-      }, 1000);
-    });
-  })
-  .then((evenNumbers) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const doubled = evenNumbers.map((num) => num * 2);
-        output.innerText = doubled.join(",");
-        resolve(doubled);
-      }, 2000);
-    });
-  })
-  .catch((err) => console.log(err));
+	setTimeout(()=>{
+		let evenArr=arr.filter((elem)=>{
+			if(elem%2==0)
+			{
+				return elem*2
+			}
+		})
+		output.innerText=evenArr
+	},2000)
+	})
+}
